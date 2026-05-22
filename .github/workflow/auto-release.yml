@@ -1,0 +1,26 @@
+name: Auto-Release
+
+on: 
+  push:
+    tags: 
+    - '*.*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ inputs.version || github.ref }}
+        artifacts: "./Assemblies.zip"
+        body: |
+          This release contains the assemblies of Resonite version ${{github.ref_name}}.
