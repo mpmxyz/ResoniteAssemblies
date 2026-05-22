@@ -17,4 +17,4 @@ You can clone this repository to update the assemblies independently from me.
 3. `git add *`
 4. `git commit -m 'Updated Assemblies'`
 5. `git tag "$RESONITE_VERSION"` (`$RESONITE_VERSION` needs to match the pattern "*.*.*.*")
-6. `git push --all`
+6. `git push --follow-tags`
