@@ -12,6 +12,9 @@ You can clone this repository to update the assemblies independently from me.
 3. Your projects can reference files locally and during a GitHub action if you make the assumed install path of Resonite configurable. (i.e. using the variable `ResonitePath`)
 
 # How to update
-1. Ensure that the environment variable `ResonitePath` points to a valid Resonite install! (can be configured in an optional .env file)
-2. Run the script TODO.ps1 or TODO.sh!
-
+1. Ensure that the environment variable `ResonitePath` points to a valid Resonite install! (can be configured in an optional `env.bat` file)
+2. Run the script `make.bat`!
+3. `git add *`
+4. `git commit -m 'Updated Assemblies'`
+5. `git tag "$RESONITE_VERSION"` (`$RESONITE_VERSION` needs to match the pattern "*.*.*.*")
+6. `git push --tags`
