@@ -22,5 +22,6 @@ jobs:
       with:
         tag: ${{ inputs.version || github.ref_name }}
         artifacts: "./Assemblies.zip"
+        makeLatest: true
         body: |
           This release contains the assemblies of Resonite version ${{ inputs.version || github.ref_name}}.
