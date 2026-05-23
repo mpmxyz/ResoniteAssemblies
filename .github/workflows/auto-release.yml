@@ -2,14 +2,16 @@ name: Auto-Release
 
 on: 
   push:
-    tags: 
-    - '*.*.*.*'
+    branches: 
+    - main
   workflow_dispatch:
     inputs:
       version:
-        description: Version
-        required: true
+        description: Version Override
+        required: false
         type: string
+env:
+  ResonitePath: Assemblies
 
 jobs:
   release:
@@ -17,11 +19,21 @@ jobs:
     permissions:
       contents: write
     steps:
+    - uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 #v5.2.0
+      with:
+        dotnet-version: '10'
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6.0.2
+    - name: Extract Resonite version
+      id: extract_version
+      run: |
+        RESONITE_VERSION="$(dotnet script get-resonite-version.csx)" || exit $?
+        echo "resonite_version=$RESONITE_VERSION" >> "$GITHUB_OUTPUT"
+        echo "Detected Resonite version: $RESONITE_VERSION"
     - uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd #v1.12.0
       with:
-        tag: ${{ inputs.version || github.ref_name }}
+        tag: ${{inputs.version || steps.extract_version.outputs.resonite_version}}
         artifacts: "./Assemblies.zip"
         makeLatest: true
+        allowUpdates: true
         body: |
-          This release contains the assemblies of Resonite version ${{ inputs.version || github.ref_name}}.
+          This release contains the assemblies of Resonite version ${{steps.extract_version.outputs.resonite_version}}.

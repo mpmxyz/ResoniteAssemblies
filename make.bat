@@ -13,7 +13,7 @@ IF NOT EXIST %ResonitePath% (
 	echo Creating assemblies from directory "%ResonitePath%"...
 
 	pushd %ResonitePath%
-	del /Q %outputDirectory%
+	del /S /Q %outputDirectory%
 	REM Create assemblies with Refasmer CLI tool (see: https://github.com/JetBrains/Refasmer)
 	refasmer -g --all --outputdir=%outputDirectory% Awwdio*dll ColorLUT*dll Elements*dll FrooxEngine*dll PhotonDust*dll ProtoFlux*dll Renderite*dll SkyFrost*dll YellowDogMan*dll
 	refasmer -g --all --outputdir=%outputDirectory% Bepu*dll
