@@ -4,6 +4,11 @@ on:
   push:
     branches: 
     - main
+    paths:
+    - 'Assemblies/**'
+    - 'Assemblies.zip'
+    - '.github/workflows/**'
+    - 'get-resonite-version.csx'
   workflow_dispatch:
     inputs:
       version:

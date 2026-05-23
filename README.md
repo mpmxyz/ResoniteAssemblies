@@ -40,6 +40,4 @@ unzip "$ZIP_FILE"
 2. Run the script `make.bat`! It requires the Refasmer CLI tool. (see: [https://github.com/JetBrains/Refasmer](https://github.com/JetBrains/Refasmer))
 3. `git add *`
 4. `git commit -m 'Updated Assemblies'`
-5. `git tag "$RESONITE_VERSION"` (`$RESONITE_VERSION` needs to match the pattern "*.*.*.*")
-6. `git push`
-7. `git push --tags`
+5. `git push`
