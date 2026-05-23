@@ -26,6 +26,7 @@ jobs:
     - name: Extract Resonite version
       id: extract_version
       run: |
+        dotnet tool install -g dotnet-script
         RESONITE_VERSION="$(dotnet script get-resonite-version.csx)" || exit $?
         echo "resonite_version=$RESONITE_VERSION" >> "$GITHUB_OUTPUT"
         echo "Detected Resonite version: $RESONITE_VERSION"
