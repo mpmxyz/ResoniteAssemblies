@@ -7,14 +7,14 @@ Distribution of reference assemblies is permitted by Resonite's [mod and plugin 
 You can clone this repository to update the assemblies independently from me.
 
 # How to use
-1. Download the zip file [Assemblies.zip](https://github.com/mpmxyz/ResoniteAssemblies/raw/refs/heads/main/Assemblies.zip)
+1. Download the zip file [Assemblies.zip](https://github.com/mpmxyz/ResoniteAssemblies/raw/refs/heads/main/Assemblies.zip):
 
 ```sh
-curl https://github.com/mpmxyz/ResoniteAssemblies/raw/refs/heads/main/Assemblies.zip
+wget https://raw.githubusercontent.com/mpmxyz/ResoniteAssemblies/refs/heads/main/Assemblies.zip
 ```
 or use a github action of your choice to download the latest release zip file
 
-2. Unpack the zip file into the folder that is supposed to emulate the Resonite install directory.
+2. Unpack the zip file into the folder that is supposed to emulate the Resonite install directory:
 
 ```sh
 ZIP_FILE="$(realpath Assemblies.zip)"

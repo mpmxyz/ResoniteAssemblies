@@ -4,6 +4,7 @@ echo OFF
 REM Load customized environment variables if available
 IF EXIST env.bat call env.bat
 set outputDirectory=%cd%\Assemblies
+set licenseSourcePath=%cd%\Licenses
 set zipPath=%cd%\Assemblies.zip
 
 IF NOT EXIST %ResonitePath% (
@@ -14,7 +15,10 @@ IF NOT EXIST %ResonitePath% (
 	pushd %ResonitePath%
 	del /Q %outputDirectory%
 	REM Create assemblies with Refasmer CLI tool (see: https://github.com/JetBrains/Refasmer)
-	refasmer -g --all --outputdir=%outputDirectory% Awwdio*dll Elements*dll FrooxEngine*dll PhotonDust*dll ProtoFlux*dll Renderite*dll SkyFrost*dll YellowDogMan*dll
+	refasmer -g --all --outputdir=%outputDirectory% Awwdio*dll ColorLUT*dll Elements*dll FrooxEngine*dll PhotonDust*dll ProtoFlux*dll Renderite*dll SkyFrost*dll YellowDogMan*dll
+	refasmer -g --all --outputdir=%outputDirectory% Bepu*dll
+	
+	xcopy /I /E %licenseSourcePath% %outputDirectory%\Licenses
 
 	echo Creating zip file...
 
