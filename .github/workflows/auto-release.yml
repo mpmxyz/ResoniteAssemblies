@@ -32,7 +32,7 @@ jobs:
       id: extract_version
       run: |
         dotnet tool install -g dotnet-script || exit $?
-        $RESONITE_VERSION="$(dotnet script get-assembly-version.csx Assemblies/FrooxEngine.dll)" || exit $?
+        RESONITE_VERSION="$(dotnet script get-assembly-version.csx Assemblies/FrooxEngine.dll)" || exit $?
         echo "resonite_version=$RESONITE_VERSION" >> "$GITHUB_OUTPUT" || exit $?
         echo "Detected Resonite version: $RESONITE_VERSION"
     - uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd #v1.12.0
