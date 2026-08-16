@@ -2,7 +2,7 @@
 This repository contains a small script and the reference assemblies it creates from a Resonite install.
 It is meant as a lightweight starting point to create workflows for mods and plugins.
 
-Distribution of reference assemblies is permitted by Resonite's [mod and plugin policies](https://resonite.com/policies/ModAndPlugin.html#reference-assemblies).
+Distribution of reference assemblies is permitted by Resonite's [mod and plugin policies](https://resonite.com/policies/ModAndPlugin.html#reference-assemblies). (Note: Reference assemblies contain no implementation, just a hull of all structs and classes.)
 
 You can clone this repository to update the assemblies independently from me.
 
@@ -36,8 +36,15 @@ unzip "$ZIP_FILE"
 
 
 # How to update
-1. Ensure that the environment variable `ResonitePath` points to a valid Resonite install! (can be configured in an optional `env.bat` (Windows) or `.env` (Linux))
-2. Run the script `make.bat` (Windows) or `make.sh` (Linux)! It requires the Refasmer CLI tool. (see: [https://github.com/JetBrains/Refasmer](https://github.com/JetBrains/Refasmer))
+## Prerequisites
+1. Environment variable `ResonitePath` points to a valid Resonite install. (can be configured in an optional `env.bat` (Windows) or `.env` (Linux))
+2. The dotnet tool dependencies are installed (i.e. via `dotnet tool restore`):
+    - `dotnet-script`
+    - [JetBrains.Refasmer.CliTool](https://github.com/JetBrains/Refasmer) is installed! (`dotnet tool install JetBrains.Refasmer.CliTool`)
+
+## Update workflow
+1. Update Resonite on local machine!
+2. Run the script `make.bat` (Windows) or `make.sh` (Linux)! 
 3. `git add *`
 4. `git commit -m 'Updated Assemblies'`
 5. `git push`

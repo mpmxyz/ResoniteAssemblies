@@ -11,24 +11,36 @@ IF NOT EXIST %ResonitePath% (
 	echo Incorrect or missing environment variable 'ResonitePath': "%ResonitePath%"
 ) ELSE (
 	echo Creating assemblies from directory "%ResonitePath%"...
-
-	pushd %ResonitePath%
+ 
 	del /S /Q %outputDirectory%
 	REM Create assemblies with Refasmer CLI tool (see: https://github.com/JetBrains/Refasmer)
-	refasmer -g --all --outputdir=%outputDirectory% Awwdio*dll ColorLUT*dll Elements*dll FrooxEngine*dll PhotonDust*dll ProtoFlux*dll Renderite*dll SkyFrost*dll YellowDogMan*dll
-	refasmer -g --all --outputdir=%outputDirectory% Bepu*dll
+	dotnet refasmer -g --all --outputdir=%outputDirectory% %ResonitePath%\Awwdio*dll
+	dotnet refasmer -g --all --outputdir=%outputDirectory% %ResonitePath%\ColorLUT*dll
+	dotnet refasmer -g --all --outputdir=%outputDirectory% %ResonitePath%\Elements*dll
+	dotnet refasmer -g --all --outputdir=%outputDirectory% %ResonitePath%\FrooxEngine*dll
+	dotnet refasmer -g --all --outputdir=%outputDirectory% %ResonitePath%\PhotonDust*dll
+	dotnet refasmer -g --all --outputdir=%outputDirectory% %ResonitePath%\ProtoFlux*dll
+	dotnet refasmer -g --all --outputdir=%outputDirectory% %ResonitePath%\Renderite*dll
+	dotnet refasmer -g --all --outputdir=%outputDirectory% %ResonitePath%\SkyFrost*dll
+	dotnet refasmer -g --all --outputdir=%outputDirectory% %ResonitePath%\YellowDogMan*dll
+	dotnet refasmer -g --all --outputdir=%outputDirectory% %ResonitePath%\Bepu*dll
 	
 	xcopy /I /E %licenseSourcePath% %outputDirectory%\Licenses
 
 	echo Creating zip file...
 
-	cd %outputDirectory%
+	pushd %outputDirectory%
 	del /Q %zipPath%
 	REM Create zip file that can be easily published
 	tar -a -c -f %zipPath% *
 
 	popd
 
-	echo Successfully created and packaged Resonite assemblies:
+	echo "Successfully created and packaged Resonite assemblies:"
 	dir /B %outputDirectory%
+
+	echo "Extracting Resonite Version..."
+	dotnet script get-assembly-version.csx Assemblies/FrooxEngine.dll > RESONITE_VERSION
+	echo "Version:"
+	type RESONITE_VERSION
 )
