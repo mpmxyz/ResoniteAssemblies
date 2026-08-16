@@ -36,8 +36,8 @@ unzip "$ZIP_FILE"
 
 
 # How to update
-1. Ensure that the environment variable `ResonitePath` points to a valid Resonite install! (can be configured in an optional `env.bat` file)
-2. Run the script `make.bat`! It requires the Refasmer CLI tool. (see: [https://github.com/JetBrains/Refasmer](https://github.com/JetBrains/Refasmer))
+1. Ensure that the environment variable `ResonitePath` points to a valid Resonite install! (can be configured in an optional `env.bat` (Windows) or `.env` (Linux))
+2. Run the script `make.bat` (Windows) or `make.sh` (Linux)! It requires the Refasmer CLI tool. (see: [https://github.com/JetBrains/Refasmer](https://github.com/JetBrains/Refasmer))
 3. `git add *`
 4. `git commit -m 'Updated Assemblies'`
 5. `git push`
