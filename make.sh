@@ -41,6 +41,15 @@ else
 	
 	cp -r "$licenseSourcePath" "$outputDirectory/Licenses"
 
+	echo "Extracting Resonite Version..."
+	dotnet script get-assembly-version.csx "$outputDirectory"/FrooxEngine.dll > "$outputDirectory"/RESONITE_VERSION || {
+		echo "Did you install dotnet script?" >&2
+		echo ">dotnet tool install dotnet-script"
+		exit 8
+	}
+	echo "Version:"
+	cat "$outputDirectory"/RESONITE_VERSION
+
 	echo "Creating zip file..."
 
 	pushd "$outputDirectory" || exit 5
@@ -52,13 +61,4 @@ else
 
 	echo "Successfully created and packaged Resonite assemblies:"
 	find "$outputDirectory"
-
-	echo "Extracting Resonite Version..."
-	dotnet script get-assembly-version.csx Assemblies/FrooxEngine.dll > RESONITE_VERSION || {
-		echo "Did you install dotnet script?" >&2
-		echo ">dotnet tool install dotnet-script"
-		exit 8
-	}
-	echo "Version:"
-	cat RESONITE_VERSION
 fi

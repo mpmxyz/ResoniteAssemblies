@@ -27,6 +27,10 @@ IF NOT EXIST %ResonitePath% (
 	
 	xcopy /I /E %licenseSourcePath% %outputDirectory%\Licenses
 
+	echo Extracting Resonite Version...
+	dotnet script get-assembly-version.csx %outputDirectory%\FrooxEngine.dll > %outputDirectory%\RESONITE_VERSION
+	echo Version:
+	type %outputDirectory%\RESONITE_VERSION
 	echo Creating zip file...
 
 	pushd %outputDirectory%
@@ -36,11 +40,7 @@ IF NOT EXIST %ResonitePath% (
 
 	popd
 
-	echo "Successfully created and packaged Resonite assemblies:"
+	echo Successfully created and packaged Resonite assemblies:
 	dir /B %outputDirectory%
 
-	echo "Extracting Resonite Version..."
-	dotnet script get-assembly-version.csx Assemblies/FrooxEngine.dll > RESONITE_VERSION
-	echo "Version:"
-	type RESONITE_VERSION
-)
+)	
