@@ -31,7 +31,7 @@ jobs:
     - name: Extract Resonite version
       id: extract_version
       run: |
-        dotnet tool install -g dotnet-script || exit $?
+        dotnet tool restore || exit $?
         RESONITE_VERSION="$(dotnet script get-assembly-version.csx Assemblies/FrooxEngine.dll)" || exit $?
         echo "resonite_version=$RESONITE_VERSION" >> "$GITHUB_OUTPUT" || exit $?
         echo "Detected Resonite version: $RESONITE_VERSION"
